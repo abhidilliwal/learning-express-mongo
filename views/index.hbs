@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css" />
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Write your comment</h1>
+        </div>
+    </section>
+    {{#if showSaveMessage}}
+        <div class="container">
+          <article class="message is-success">
+            <div class="message-body">
+              Your comment was saved successfully.
+            </div>
+          </article>
+        </div>
+    {{/if}}
+    {{#if errorMsg}}
+        <div class="container">
+          <article class="message is-danger">
+            <div class="message-body">
+              {{errorMsg}}
+            </div>
+          </article>
+        </div>
+    {{/if}}
+    <section class="section">
+        <div class="container">
+            <form method="post" action="/">
+                <div class="field">
+                  <label class="label">Name</label>
+                  <div class="control">
+                    <input name="name" value="{{draftComment.name}}" class="input" type="text" placeholder="Name" autocomplete="name">
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label class="label">Email</label>
+                  <div class="control">
+                    {{!-- <input class="input is-danger" type="email" placeholder="Email input" value="hello@"> --}}
+                    <input name="email" value="{{draftComment.email}}" class="input" type="email" placeholder="Email" autocomplete='email'>
+                  </div>
+                  {{!-- <p class="help is-danger">This email is invalid</p> --}}
+                </div>
+
+
+                <div class="field">
+                  <label class="label">Comment</label>
+                  <div class="control">
+                    <textarea name="comments" class="textarea" placeholder="Comment...">{{draftComment.comments}}</textarea>
+                  </div>
+                </div>
+
+                <div class="field is-grouped">
+                  <div class="control">
+                    <button class="button is-link">Submit</button>
+                  </div>
+                  {{!-- <div class="control">
+                    <button class="button is-text">Cancel</button>
+                  </div> --}}
+                </div>
+            </form>
+        </div>
+    </section>
+
+    {{#if commentList}}
+    <section class="section">
+      <div class="container">
+        <h3 class="title is-3">Comments</h3>
+
+        {{#each commentList}}
+          <div class="card">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-4">{{this.name}}</p>
+                  <p class="subtitle is-6">{{this.email}}</p>
+                </div>
+              </div>
+
+              <div class="content">
+                {{this.comments}}
+              </div>
+            </div>
+          </div>
+        {{/each}}
+
+
+    </section>
+    {{/if}}
+
+</body>
+</html>
